@@ -9,12 +9,9 @@ import Paper from '@mui/material/Paper';
 import { useNavigate } from "react-router";
 import axios from "axios";
 const  Stock = ()=> {
-  const [data, setData] = React.useState([]);
+
   const [csvArray, setCsvArray] = React.useState([]);
-  const [symbol , setSymbol ] =React.useState("");
-const [name , setName]=React.useState("");
-const [sector , setSector]=React.useState("");
-const [validtill , setValidtill]=React.useState("");
+
   
   const getData = () => {
   

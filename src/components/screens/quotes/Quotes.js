@@ -17,17 +17,37 @@ const Quotes = () => {
   };
 
   if(data.payload){
-    console.log(data.payload)
-  console.log(Object.entries(data.payload)[0][1][0].price, "key===");
+    console.log(data.payload , 'data.payload')
+console.log ( Object.entries(data.payload)[0][1], '=-=-=-=-arar')
+
   }
-  
+
   React.useEffect(() => {
     getData();
+   
   }, []);
+
+  React.useEffect(()=>{
+    if(data.payload){
+      setArrayData(Object.entries(data.payload)[0][1])
+      }
+  },[data])
   return (
     <div>
       <div>
-   
+   {
+     arrayData.map((item , index)=>{
+       return(
+         <div>
+           <div>{item.price}</div>
+           <div>{item.time}</div>
+           <div>{item.price}</div>
+           </div>
+       );
+     })
+   }
+  
+  
       </div>
     </div>
   );
