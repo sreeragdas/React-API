@@ -5,6 +5,7 @@ const Quotes = () => {
   const { state } = useLocation();
   console.log(state, "=-=-=-=");
   const [symbol, SetSymbol] = useState(state);
+  const [arrayData , setArrayData]=useState([])
   const [data, setData] = useState([]);
   console.log(typeof symbol);
   const getData = () => {
@@ -14,7 +15,11 @@ const Quotes = () => {
         setData(res.data);
       });
   };
-  console.log(typeof data.payload, "data===");
+
+  if(data.payload){
+    console.log(data.payload)
+  console.log(Object.entries(data.payload)[0][1][0].price, "key===");
+  }
   
   React.useEffect(() => {
     getData();
