@@ -14,6 +14,7 @@ const Quotes = () => {
   const [symbol, SetSymbol] = useState(state);
   const [arrayData, setArrayData] = useState([]);
   const [data, setData] = useState([]);
+  const [order, setOrder] = useState("ASC");
   console.log(typeof symbol);
   const getData = () => {
     axios
@@ -37,52 +38,62 @@ const Quotes = () => {
       setArrayData(Object.entries(data.payload)[0][1]);
     }
   }, [data]);
+
+  console.log(data, "data");
+
+  const sorting = (sort) => {
+    const sorted = [...arrayData].sort((a, b) => {
+      for (let i = 0; i < arrayData.length; i++) {
+        console.log(b.time.localeCompare(a.timestamp), "++++++++++@@@@@@@@@@@");
+      }
+    });
+    setArrayData(sorted);
+  };
+
   return (
-    //   <div>
-    //     <div>
-    //  {
-    //    arrayData.map((item , index)=>{
-    //      return(
-    //        <div>
-    //          <div>{item.price}</div>
-    //          <div>{item.time}</div>
-    //          <div>{item.price}</div>
-    //          </div>
-    //      );
-    //    })
-    //  }
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Price</TableCell>
-            <TableCell>time</TableCell>
-            <TableCell>Validtill</TableCell>
-
+            <TableCell>
+              <button>Price</button>
+            </TableCell>
+            <TableCell>
+              <button
+                onClick={() => {
+                  sorting("time");
+                }}
+              >
+                time
+              </button>
+            </TableCell>
+            <TableCell>
+              <button
+                onClick={() => {
+                  sorting("valid_till");
+                }}
+              >
+                Validtill
+              </button>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-         
-              <TableCell component="th" scope="row">
-                {/* {row.name} */}
-              </TableCell>
-              {arrayData.map((item, index) => {
-                return (
-                  <TableRow>
-                    <TableCell align="right">{item.price}</TableCell>
-                    <TableCell align="right">{item.time}</TableCell>
-                    <TableCell align="right">{item.valid_till}</TableCell>
-                  </TableRow>
-                );
-              })}
-           
-      
+          <TableCell component="th" scope="row">
+            {/* {row.name} */}
+          </TableCell>
+          {arrayData.map((item, index) => {
+            return (
+              <TableRow>
+                <TableCell align="right">{item.price}</TableCell>
+                <TableCell align="right">{item.time}</TableCell>
+                <TableCell align="right">{item.valid_till}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
-
-    //   </div>
-    // </div>
   );
 };
 export default Quotes;
